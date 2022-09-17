@@ -1,0 +1,10 @@
+install.packages(c("ggplot2","swirl","lattice","car","fImport","tseries"))
+if(!require(pacman)){install.packages("pacman")}
+library(ggplot2)
+library(swirl)
+library(lattice)
+library(car)
+library(fImport)
+library(tseries)
+install.packages("curl", dependencies = TRUE)
+install.packages("httr", dependencies = TRUE)

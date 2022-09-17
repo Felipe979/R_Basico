@@ -1,0 +1,18 @@
+{
+    "type": [
+        0,
+        1,
+        2,
+        0,
+        1,
+        2
+    ],
+    "data": [
+        "> ",
+        "install.packages(\"curl\", dependencies = TRUE)",
+        "Error in install.packages : Updating loaded packages\n",
+        "> ",
+        "install.packages(\"httr\", dependencies = TRUE)",
+        "Error in install.packages : Updating loaded packages\n\nRestarting R session...\n\n"
+    ]
+}

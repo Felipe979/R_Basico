@@ -1,0 +1,76 @@
+---
+title: "Aula 1 - Instalação de Ferramentas"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "2022-09-15"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Instalando os pacotes necessários para trabalhar no software durante o curso
+
+Podemos instalar pacotes para expandir as funcionalidades do R através dos seguintes procedimentos:
+
+* Instalando pacotes manualmente e de forma unitária:
+
+    `install.packages("car")`
+Podemos utilizar outras linguagens de programação no Rmarkdown, como por exemplo, a linguagem Python:
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+
+# if(!require(reticulate)){install.packages("reticulate")}
+library(reticulate)
+
+use_python("C:/Users/felip/AppData/Local/Programs/Python/Python310/python.exe")
+
+```
+
+```{python}
+import numpy as np
+x = np.array([0, 1., 2., 3, 4, 5, 6])
+y = np.array([0, 2.2, 4.1, 6.7, 8.0, 9.8, 13])
+
+mod_linear = np.polyfit(x, y, 1)
+
+a = float(mod_linear[0])
+b = float(mod_linear[1])
+
+y_mod = a * x + b
+
+print(f"Coeficiente angular: {a:6.4f}\nCoeficiente linear: {b:6.4f}")
+# print(f"Coeficiente linear: {b:6.4f}")
+
+```
+
+* Criando um vetor e declarando quais os pacotes você deseja instalar:
+
+    `install.packages(c("ggplot2","swirl","lattice","car","fImport","tseries"))`
+    
+* Utilizando o pacote pacman que verifica a existência dos pacotes declarados. Caso ele encontre o pacote, o mesmo é carregado na memória. Caso o pacote não seja instalado, o pacman o instala a em seguida o carrega na memória:
+
+    `if(!require(pacman)){install.packages("pacman")}`
+
+    `pacman::p_load(ggplot2, swirl, lattice, car, fImport, tseries)`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

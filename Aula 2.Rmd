@@ -1,0 +1,35 @@
+---
+title: "Aula 2 - Ajuda em R"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "13/09/2022"
+output: html_document
+---
+
+
+## Fontes de ajuda
+
+Uma das vantagens de utilização da linguagem R é a facilidade com que se pode obter ajuda para solucionar dúvidas. Alguns métodos de ajuda são:
+  
+* [Stack Overflow ](https://stackoverflow.com/)
+* Pessoas que saibam do assunto
+
+Também existe um sistema de ajuda integrado ao sistema do R. Podemos utilizar algumas funções como:
+
+* `help()` ou `?`
+    <!---
+    `help(print)`, `?print`
+    -->
+* `example()`
+    <!---
+    - Exemplo: `example("read.table")`
+    -->    
+* `library(help=" ")`
+    <!---
+    - Exemplo: `library(help="grDevices")`
+    -->
+* `vignette()`
+    <!---
+    - Exemplo:        
+    `vignette(all=TRUE)`        
+    `vignette(Into2Matrix)`
+    -->
