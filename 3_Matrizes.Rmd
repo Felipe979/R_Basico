@@ -1,0 +1,88 @@
+---
+title: "**Programação Estatística**"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "08/10/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Matrizes**
+
+Em **R** as matrizes são um vetor que possue um atributo particular denominado _dimensão_ (**dim**), que retor um vetor indicando o número de linhas e de colunas. 
+
+As matrizes podem ser criadas usando a função `matrix()`
+
+```{r matriz}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+m
+```
+
+Podemos notar que as matrizes são criadas preenchendo coluna por coluna, da esquerda para a direita. Isto é especialmente importante quando desejamos converter vetores em matrizes, pois devemos ordenar os elementos de maneira adequada a nossa necessidade.
+
+Algumas informações podem ser extraídas das matriz, como por exemplo:
+
+```{r informações}
+dim(m)          # Dimensão da matriz
+
+class(dim(m))   # Classe da dimensão
+
+attributes(m)   # Atributos da dimensão
+```
+
+Podemos transformar um vetor em uma matriz ao atribuir uma dimensão a esse vetor, como no exemplo abaixo:
+
+```{r vetor paramatriz}
+m <- c(1:10)
+m
+
+dim(m) <- c(2,5)  # A dimensão será de 2 linhas e 5 colunas
+m
+```
+
+Outra maneira de criar uma matriz é utilizando as funções `cbind()` e `rbind()`, que cria matrizes a partir de vetores pré-existentes. 
+
+```{r}
+x <- 5:8
+y <- 12:15
+
+cbind(x,y)
+rbind(x,y)
+```
+
+É importante salientar que as matrizes são objetos que precisam ter **TODOS** os seus elementos preenchidos. Isto significa que não vetores de tamanhos diferentes não podem gerar matrizes através dos métodos `cbind` e `rbind`.
+
+Matrizes com os mesmos atributos de dimensão podem ser utilizadas para a realização de operações aritméticas.
+
+```{r}
+x <- matrix(1:16, 4, 4)
+x
+y <- matrix(rep(5,16), 4, 4)
+y
+
+x + y     # Soma elemento a elemento
+x * y     # Multiplicação elemento a elemento
+x %% y    # Resto da divisão entre elementos
+x %*% y   # Multiplicação matricial (Convencional)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,95 @@
+---
+title: '**Programação Estatística**'
+author: "Felipe Augusto Ferreira das Chagas"
+date: "09/10/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Listas**
+
+Listas são um tipo especial de vetor em que é permitido a inserção de mais de um tipo de dado.
+
+```{r}
+x <- list(1, "a", TRUE, 1+8i)
+x
+```
+
+## **Fatores**
+
+Fatores são um tipo especial de vetor que é comumente utilizado para representar dados categóricos ordenados ou não ordenados. Pode-se pensar neles como um vetor de inteiros,onde cada inteiro é atribuído a uma tag específica.
+
+```{r}
+y <- factor(c("yes","yes","no"))
+y
+
+table(y)  # Retorna todos os fatores de um vetor do tipo                 # factor, assim como a suas respectivas frequências
+```
+
+Internamente o **R** associa cada elemento de um fator a um número inteiro, e podemos verificar isso a utilizando a função `unclass()` 
+
+```{r}
+unclass(y)
+```
+
+A ordem dos níveis pode ser estabelecida dentro da função `factor()` utilizando o parâmetro `level`, que recebe um vetor que explicita a ordem dos fatores
+
+```{r}
+x <- factor(c("SIM", "NÃO", "NÃO"), level = c("SIM","NÃO"))
+x
+
+```
+
+## **DataFrames**
+
+Dataframes são um tipo de dado que armazena dados tabulares em R, recordando a estrutura de uma matriz. Se apresentam como um tipo especial de lista onde cada coluna possui um tipo de dado específico. As colunas de um dataframe devem ser de tamanhos iguais.
+
+Podemos criar dataframes ao ler arquivos usando as funções `read.csv` e similares, além de poder converter uma matriz em um dataframe utilizando a função `data.matrix()`.
+
+```{r}
+x <- data.frame(col_1 = 1:4, col_2 = c(T,T,T,F))
+x
+
+nrow(x)
+ncol(x)
+```
+
+## **Nomes**
+
+Podemos atribuir nomes aos nossos objetos em **R**. Os nomes são atributos que nos permite descrever de maneira concisa o conteúdo de uma linha ou coluna, tornando o código mais limpo e reproduzível, com objetos perfeitamente descritos.
+
+Podemos atribuir nomes a listas, matrizes, dataframes, etc.
+
+```{r}
+# Para listas 
+
+z <- 11:14
+names(z)
+names(z) <- c("onze", "doze", "treze", "quatorze")
+z
+
+var <- list(3,5,7)
+names(var) <- c("Um","Dois","Três")
+var
+
+# Para matrizes
+
+m <- matrix(1:4, nrow = 2, ncol = 2)
+m
+
+dimnames(m) <- list(c("a", "b"), c("h", "i"))
+m
+```
+
+
+
+
+
+
+
+
+
+
