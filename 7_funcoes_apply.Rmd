@@ -1,0 +1,94 @@
+---
+title: "__Funções apply__"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "11/10/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Introdução**
+
+As funções **``*apply``** pertencem a um conjunto especial de funções vetorizadas que possuem a capacidade de trabalhar com dados de maneira rápida e eficiente, evitando o uso explícito de estrutura de controle como o **for**, **while** ou **repeat**, por exemplo. Essas funções podem ser aplicadas em objetos do tipo vetor, matriz, lista, arrays, dataframes, etc.
+
+### **Função ``apply``**
+
+Esta função retorna um vetor ou array ou lista de valores obtidos ao aplicar uma função às margens de um array ou matriz, isto é, em subconjuntos de dados de matrizes, arrayz, etc. simultaneamente.
+
+Sua sintaxe básica é:
+
+**``apply(X, MARGIN, FUN)``**
+
+onde 
+
+- **`X`** é o array ou matriz que se deseja trabalhar.
+
+- **`MARGIN`** indica se queremos aplicar a função parâmetro **FUN** nas linhas **``(MARGIN = 1)``**, colunas **``(MARGIN=2)``** ou ambos **``(MARGIN=c(1,2))``**.
+
+- **``FUN``** é a função que desejamos executar com os subconjuntos de dados. Pode ser uma **função de agregação** (com a função sum, mean ou sd), de **transformação ou extração de subconjuntos** ou uma **função vetorizada** que retorna elementos mais complexos.
+
+#### Exemplo
+
+```{r}
+set.seed(100)     # Esta função permite que os números                           # aleatórios gerados neste script sejam os                     # mesmos em qualquer outra máquina, isto é, a                   # seed 100 fornece os mesmos números                           # aleatórios em qualquer editor
+
+X <- matrix(rnorm(30), nrow = 5, ncol = 6)
+
+media_colunas <- apply(X, 2, sum)
+media_colunas
+
+sum(X[,3])  # Média da coluna 3
+
+identical(sum(X[,3]),media_colunas[3])
+
+```
+
+É possível notar que a função **``sum``** foi aplicada em cada coluna através da função **``apply``**. Para fazer esse mesmo trabalho, provavelmente utilizaríamos um laço do tipo **for**, o que deixaria o código mais denso e resultaria em perda de eficiência de processamento.
+
+### **Função ``lapply``**
+
+Esta é função aplicada em uma lista, dataframes, matrizes ou vetores e retorna ao usuário uma lista modificada. Possui uma sintaxe similar a função **``apply``**, divergindo apenas no terceiro argumento que, dessa vez, recebe os parâmetros da função que se usa como argumento.
+
+#### Exemplo
+
+```{r}
+A <- matrix(1:9, 3, 3)
+B <- matrix(4:15, 4, 3)
+C <- matrix(8:10, 3, 2)
+
+lista <- list(A, B, C)
+
+# Inserindo uma lista, um operador(operador de subconjunto), e os parâmetros do operador. Neste caso, queremos extrair apenas a segunda coluna dos elementos A, B e C do objeto 'lista'
+
+lapply(lista, "[", ,2) 
+
+# Extraindo a primeira linha de cada elemento de 'lista'
+lapply(lista, "[", 1,)
+
+# Extraindo o elemento (1,2) de cada elemento de 'lista'
+lapply(lista, "[", 1,2)
+```
+
+### **Função ``sapply``**
+
+Possui a finalidade de simplificar as saídas da função lapply, isto é, retorna elementos na forma de vetor.
+
+```{r}
+A <- matrix(1:9, 3, 3)
+B <- matrix(4:15, 4, 3)
+C <- matrix(8:10, 3, 2)
+
+lista <- list(A, B, C)
+
+# Inserindo uma lista, um operador(operador de subconjunto), e os parâmetros do operador. Neste caso, queremos extrair apenas a segunda coluna dos elementos A, B e C do objeto 'lista'
+
+lapply(lista, "[", 2,1) 
+
+# Apenas mudando o nome da função, temos agora como retorno um vetor ao exigirmos um único elemento
+sapply(lista, "[", 2,1) 
+```
+
+
+

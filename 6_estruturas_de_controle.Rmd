@@ -1,0 +1,59 @@
+---
+title: "Estruturas de Controle"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "2022-10-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introdução
+
+As estruturas de controle são elementos/ferramentas responsáveis por controlar um fluxo de execução de um programa. Dependendo de certas condições, também podem ser utilizadas para executar uma operação de maneira repetida. Alguns exemplos desse tipo de artefato são:
+
+- Condicionais: **if, else**;
+- Ciclo de Repetição: **for**;
+- Ciclo de Condição: **while**;
+- Ciclo infinito: **repeat**;
+- Parar um ciclo: **break**;
+- Pular um iclo: **next**.
+
+### **if**
+
+```{r, eval=FALSE}
+if(condição){
+  rotina a executar, se verdadeiro
+} else {
+  rotina a executar, se falso
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
