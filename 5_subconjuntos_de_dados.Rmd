@@ -1,0 +1,176 @@
+---
+title: "**5 - Subconjuntos de Dados**"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "2022-10-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Podemos extrair subconjuntos de dados de estruturas que sejam muito grandes em que se deseja utilizar apenas uma amostra do total de dados, que podem ser apresentados na forma de listas, matrizes, dataframes, entre outros.
+
+- ``[]``    Os colchetes extraem elementos da mesma classe.
+- ``[[]]``  Os colchetes duplos extraem elementos de uma lista ou dataframe.
+- ``$``     O cifrão extrai colunas de um dataframe.
+
+#### **Exemplos**
+
+```{r}
+x <- c("a","b","c","c","d","a")
+x[3]      # Chamando o terceiro elemento do vetor x
+x[1]      # Chamando o primeiro elemento do vetor x
+x[1:5]    # Chamando os 5 primeiros elementos
+x[x>"b"]  # Chamando apenas os elementos maiores que b
+
+index <- x > "a" #Criando um vetor lógico de valores maiores que a
+index
+
+x[index]  # Chamando apenas os valores maiores que a
+```
+
+## **Subconjuntos de Matrizes**
+
+Para extrair um elemento de uma matriz, utilizamos ``matrix[i,j]``.
+
+Para extrair uma linha inteira, utiliza-se ``matrix[i,]``.
+
+Para extrair uma coluna inteira, utiliza-se ``matrix[,j]``.
+
+Também podemos pedir sequências de colunas ou linhas, como no exemplo a seguir:
+
+```{r}
+x <- matrix(1:10, nrow = 2, ncol = 5)
+x
+
+x[1,3]
+x[2,1]
+x[1,]
+x[,4]
+x[,3:4]
+```
+
+Ao extrair um elemento de uma matriz, o mesmo perde sua condição de matriz e se torna em um elemento de vetor, perdendo seu atributo de dimensão: para contornar esse problema, usamos o parâmetro ``drop = FALSE`` ao extrair algum elemento.
+
+```{r}
+x[2, 2:4]
+class(x[2, 2:4])
+
+x[2, 2:4, drop = FALSE]
+class(x[2, 2:4, drop = FALSE])
+```
+
+
+## **Subconjuntos de Listas**
+
+Para chamar dados de listas, utilizamos os seguintes elementos:
+
+- ``lista[]``
+- ``lista[[]]``
+- ``lista$name``
+
+Observe a classe dos subconjuntos gerados no exemplo a seguir:
+
+```{r}
+x <- list(hola1 = 1:10, hola2 = 0.005)
+x
+class(x)
+
+x[1]
+class(x[1])
+
+x[2]
+class(x[2])
+
+x[[1]]
+class(x[[1]])
+
+x$hola1
+class(x$hola1)
+
+x[["hola2"]]
+class(x[["hola2"]])
+
+x["hola2"]
+class(x["hola2"])
+```
+
+
+Outro exemplo de manipulação de dados de listas:
+
+```{r}
+x <- list(hola1 = 2:7, hola2 = 0.90, hola3 = "Hélio")
+
+x[c(1,3)] # Extraindo os elementos 1 e 3 da lista
+
+```
+
+Para manipular elementos aninhados em uma lista, usamos da seguinte sintaxe:
+
+
+
+```{r}
+x <- list(a = list(10, 11, 12), b = c(9.8, 2.33))
+
+x[[c(1,3)]]   
+x[[1]][[3]]
+x[[c(2,1)]]
+```
+
+Considere a hipótese de uma lista possuir elementos cujos nomes são muito grandes. Neste caso, podemos fazer uma procura aproximada.
+
+```{r}
+x <- list(mmmdddsss = 1:35)
+
+x[["m"]]    # O valor não é encontrado
+
+x$m         # O valor pode  ser encontrado
+
+x[["m", exact = FALSE]]   # Uma pesquisa aproximada
+```
+
+## Valores Faltantes ou Inconsistentes (NA ou NaN)
+
+Usualmente costuma-se deixar de lado os valores faltantes durante uma análise de dados, e podemos realizar isso de diversas maneiras.
+
+```{r}
+x <- c(3231, 52, NA, NA, NA, 34)
+
+faltantes <- is.na(x)  # Criando um vetor lógico de elementos faltantes
+faltantes
+
+x <- x[!faltantes]   # Reeditando o vetor original, porém, sem NA 
+x
+```
+
+Utilizando o princípio anterior, podemos eliminar as linhas que possuem valores ``NA`` em algumas de suas colunas. Para isso, podemos utilizar a função ``complete.cases()``
+
+```{r}
+
+airquality[1:7,]   # Utilizando apenas 7 elementos do dataframe
+
+no_faltantes <- complete.cases(airquality) # Indica as linhas que possuem valores faltantes 
+
+no_faltantes[1:7]
+
+airquality[no_faltantes,][1:5,] # Eliminando os valores NA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

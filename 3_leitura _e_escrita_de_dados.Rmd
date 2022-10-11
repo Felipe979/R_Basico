@@ -1,0 +1,49 @@
+---
+title: "**Programação Estatística em R**"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "08/10/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Leitura e Escrita de dados
+
+A leitura de dados no **R** é uma tarefa essencial para realizar transformações e análises com o intuito de obtermos informações relevantes através dos dados fornecidos. Dados podem ser obtidos em diversos formatos, como xlsx (arquivos excel), csv, txt, dentre outros, e o **R** possui funções dedicadas para a leitura de dados, como por exemplo:
+
+* **`read.csv`**, para arquivos separados por ","
+* **`read.csv2`**, para arquivos separados por ";"
+* **`read.table`**
+* `read.delim`, para documentos separados por tabulações
+* `readlines`
+* `source`
+* `dget`
+* `load`
+* `unserialize`
+
+Algumas dicas ao usar a função **`read.table`**:
+
+* Utilizar `col.Classes`: Este parâmetro recebe um vetor que define os tipos de dados de cada coluna, reduzindo assim o tempo de leitura de grandes bancos de dados.
+* Utilizar `nrows`: Este parâmetro restringe a quantidade de linhas que serão carregadas no **R**. Pode ser útil quando se deseja carregar apenas uma amostra de dados presentes em um enorme banco de dado.
+
+Uma maneira de estimar o tamanho de um arquivo, considerando que possui dados numéricos, é multiplicando o número de linhas pelo número de colunas e, em seguida, multiplicar o resultado por $8/10^6$ para obter o resultado em megabytes, isto é: $T = Colunas \cdot Linhas \cdot (8/10^6)$
+
+Da mesma forma que existem funções para ler dados, o **R** também dispões de funções para escrever dados, que podem ser utilizadas para exportar dados tratados, por exemplo. Dentre algumas funções com essa finalidade, podemos citar:
+
+
+* **`write.table`**
+* `writeLines`
+* `dump`
+* `dput`
+* `save`
+* `serialize`
+
+É importante saber utilizar corretamente os parâmetros das funções de leitura e escrita de dados para otimizar tais processos, isto é, aproveitando ao máximo o poder de processamento sem perda de eficiência computacional.
+
+
+
+```{r}
+
+```

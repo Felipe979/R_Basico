@@ -1,0 +1,41 @@
+---
+title: "**Instalacão de Ferramentas**"
+author: "Felipe Augusto Ferreira das Chagas"
+date: "09/10/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instalação de Pacotes
+
+Neste curso será necessário realizar a instalação de alguns pacotes. Podemos fazer isso com o comando abaixo:
+
+```{r eval=FALSE}
+install.packages(c("ggplot2","swirl","lattice","car","fImport","tseries"))
+```
+
+Uma vez instaladas as bibliotecas necessárias, podemos carregá-las usando os comandos a seguir:
+
+```{r eval=FALSE}
+library(ggplot2)
+library(swirl)
+library(lattice)
+library(car)
+library(fImport)
+library(tseries)
+```
+
+Uma maneira alternativa de realizar esse conjunto de instalações é utilizando o pacote pacman:
+
+```{r eval=FALSE}
+if(!require(pacman)){install.packages("pacman")}
+pacman::p_load(ggplot2, swirl, lattice, car, fImport, tseries)
+```
+
+
+
+
+
