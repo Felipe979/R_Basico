@@ -1,0 +1,218 @@
+---
+title: '**Gráficos**'
+author: "Felipe Augusto Ferreira das Chagas"
+date: "2022-10-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introdução aos gráficos
+
+Os gráficos são ferramentas visuais utilizadas para rápida identificação de comnportamentos de um conjunto de dados, podendo ser utilizados para simplificar ideias e conclusões, isto é, apresentar os resultados de forma visual é muito mais intuitivo do que mostrar simplesmente um conjunto de números.
+
+Em **R**, podemos acessar alguns exemplos de gráficos através do que podemos produzir através do comando a seguir:
+
+```{r eval=FALSE, include=FALSE}
+demo(graphics)
+```
+
+Os gráficos apresentados exibem o leque de possibilidades que o **R** apresenta no momento de graficar informações de forma clara e apresentável.
+
+O sistema de gráficos do **R** conta com três tipos básicos de funções:
+
+- Funções de Alto Nível: São responsáveis por gerar gráficos de maneira pré-estabelecida.
+
+- Funções de Baixo Nível: Possuem o objetivo de ir adicionando informações a um gráfico existente
+
+- Funções Interativas: Permitem adicionar informações interativamente ou extrair informações de gráficos. Este curso cobrirá apenas funções de alto e baixo nível
+
+Vamos criar um gráfico qualquer e iremos modificá-lo utilizando parâmetros próprios e/ou funções auxiliares:
+
+```{r}
+# Plotando os pontos (1, 1), (2, 2), (3, 3), (4, 4) e (5, 5)
+# Plot é uma função genérica, podendo receber como dados um vetor, matriz, dataframe e outros conjuntos e
+# subconjuntos de dados de diferentes classes
+
+plot(1:5)
+
+# Os primeitos parâmetros são as coornedadas das abscissas
+# Os segundos parâmetros são as coordenadas das ordenadas
+
+plot(c(1, 2, 3), c(4, 5, 6))
+```
+
+Os principais parâmetros aceitos pela função `plot` podem ser conhecidos através do `?plot` ou `help(plot)`. Alguns deles são:
+
+- `type`: Determina o tipo de gráficos;
+    * "p": Pontos;
+    * "l": Linhas;
+    * "b": Pontos e linhas;
+    * "c": Linhas do tipo usando no argumento b;
+    * "o": Pontos e linhjas sobrepostos;
+    * "s": Escalonado; Forma de escada;
+    * "S": Escalonado;
+    * "n": Sem gráficos.
+- `main`: Cria um título principal;
+- `sub`: Cria um subtítulo;
+- `xlab`: Fornece um nome ao eixo x;
+- `ylab`: Fornece um nome ao eixo y.
+
+Vamos demonstrar com alguns exemplos:
+```{r}
+# linhas
+plot(c(1, 2, 3), c(4, 5, 6), type="l")
+
+# escada
+plot(6:10, type = "s")
+
+# pontos e linhas
+plot(1:10, type = "b")
+
+# inserindo um título
+plot(1:5, main="Meu gráfico", sub = "Primeiro gráfico")
+
+# alterando os nomes dos eixos ordenados
+plot(1:5, main="Meu gráfico", xlab ="x", ylab ="y")
+```
+
+Algumas vezes será necessário inserir informações sobre os gráficos produzidos com a função plot. Nesses casos, as funções de baixo nível serão úteis para adicionar estas novas informações, que podenm ser linhas, pontos, textos, etc. vamos testar isso começando a inserirpontos no gráfico anterior:
+
+```{r}
+plot(1:5, main="Meu gráfico", xlab ="x", ylab ="y")
+
+# Inserindo pontos de cor azul nas posições (1,4) e (5,2)
+points(c(1,5), c(4,2), col="blue")
+
+# Inserindo uma segmento de linha na cor amarela
+lines(c(1,4), c(2,5), col="yellow")
+
+# Inserindo uma linha que corta todo o gráfico na posição y=3, com cor vermelha e tipo de linha igual a 2, isto é, tracejada.
+abline(h=3, col="red", lty=2)
+
+# Criando um conjunto de linhas que funcionam como uma malha
+abline(h=1:5,v=1:5, col="purple")
+
+# Podemos substituir a fdunção anterior pela função grid()
+```
+
+As funções de baixo nível podem ser incrementadas com parâmentros utilizados nas funções de alto nível.
+
+### Base de dados **iris**
+
+Para exercitar os conhecimentos adquiridos, vamos fazer algumas comparações com dados do bando de dados internos do **R** chamado de **iris**, que contém informações sobre algumas espécies de flores e suas características morfológicas.
+
+```{r}
+# importando o dataset
+data("iris")
+class(iris)
+
+# visualizando as 6 primeiras linhas
+head(iris)
+
+# Sepal.Length y Sepal.Width representam o comprimento e a largula da sépala, respectivamente.
+
+# Petal.Length y Petal.Width representam o comprimento e a largula da pétala
+
+# Utilizando a função plot em todo o dataframe
+
+plot(iris)
+
+# Plotando a largura em função do comprimento de pétala
+plot(iris$Petal.Length, iris$Petal.Width)
+
+
+# HISTOGRAMAS
+
+# histograma do comprimento de pétala
+hist(iris$Petal.Length, col="red")
+
+# visualizando o gráfico em termos de distribuição
+hist(iris$Petal.Length, col="red", freq = FALSE)
+
+# diminuindo a quantidade de caixas do histograma
+hist(iris$Petal.Length, col="red", breaks=5)
+
+# aumentando a quantidade de caixas do histograma
+hist(iris$Petal.Length, col="red", breaks=15)
+
+# BOXPLOTS
+
+# plotando o boxplot do comprimento de sépala de cada espécie, utilizando as cores 2, 3 e 4 para diferenciá-los
+boxplot(Sepal.Width ~ Species, data = iris, col=2:4)
+
+# GRÁFICOS POR SETORES
+
+pie(c(50, 50, 50), labels = levels(iris$Species))
+```
+
+### Parâmetros do Sistema de Gráficos
+
+Es importante que sepas que si deseas ver el código fuente de cualquier función, solo debes de teclear el nombre de la función sin argumentos ni paréntesis.
+
+En R puedes especificar colores de tres maneras: como una cadena, usando los componentes RGB (rojo, verde, azul) o haciendo referencia a un índice de la paleta de colores mediante un entero.
+
+Para obtener la lista de los nombres de colores válidos, usa la función colors() ``colors()``
+
+Notarás que al final de la lista varios colores contienen la subcadena "yellow". Una manera de buscar todos los colores que contengan la subcadena "yellow", es usando la función grep().
+
+Para buscar todos los colores que contengan la subcadena "yellow" ingresa:
+
+```{r}
+grep("yellow", colors(), value=TRUE)
+```
+
+Para especificar un color usando componentes RGB, usa una cadena de la forma "#RRGGBB", donde RR, GG y BB son valores hexadecimales que especifican la cantidad de rojo, verde y azul, respectivamente.
+
+Si deseas hacer referencia a un índice de la paleta de colores mediante un entero, debes saber que existen ocho colores en la paleta por defecto.
+
+La función ``palette()`` es usada para ver o manipular la paleta de colores. La paleta de colores es usada cuando el parámetro col es usado con un valor numérico. Cada color es representado por un número entero; es decir, el número 1 representa al color negro, el 2 al rojo… y el 8 al gris. Si usas un número más grande que ocho para graficar, los colores serán reciclados.
+
+
+```{r}
+# verificando a lista de cores
+palette()
+
+# plotando as cores padrão
+plot(1:8, col=1:8,main="Colores por índice", pch=17, cex=3)
+
+# reciclando cores
+plot(1:12, col=1:12, main="Colores reciclados", pch=18, cex=3)
+```
+
+Si requieres un número más grande de colores para graficar, necesitarás acceder a una paleta más grande. Felizmente, existen varias funciones incluidas en R que te regresan colores continuos (paletas de tamaño variable), que le pueden dar aspectos diferentes a tus gráficas. Algunos ejemplos de estas funciones son ``rainbow()``, ``heat.colors()``, ``topo.colors()``, y ``terrain.colors()``.
+
+Para cambiar la paleta de colores por defecto por cualquiera de estas paletas, lo primero que debes hacer es crear una paleta. Para crear una nueva paleta basta con llamar a cualquiera de las funciones anteriormente mencionadas, mandando como argumento el número de colores que deseas que contenga la paleta.
+
+```{r}
+# criando uma paleta de 10 cores
+paleta_arcoiris <- rainbow(10)
+paleta_arcoiris
+```
+
+Para cambiar la paleta de colores por la que creaste, ingresa ``palette(paleta_arcoiris)`` en la línea de comandos. Ahora graficamos usando la nueva paleta:
+
+```{r}
+# paleta arcoiris
+plot(1:10, col=1:10, main="Paleta Arcoiris",pch=17, cex=3)
+
+# paleta cálida
+ paleta_calida <- heat.colors(10) # criando a paleta de cores
+ palette(paleta_calida)           # definindo a paleta de cores 
+ plot(1:10, col=1:10, main="Paleta Cálida",pch=17, cex=3)
+ 
+# paleta própria de cores
+ mi_paleta <- c("red", "green", "#0019FFFF")
+ plot(1:10, col=mi_paleta, main="Mi Paleta", pch=17, cex=3)
+ 
+# paleta padrão de 8 cores
+palette("default")
+```
+
+### Notação Matemática em Gráficos
+
+
+
+
