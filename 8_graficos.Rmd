@@ -211,8 +211,107 @@ plot(1:10, col=1:10, main="Paleta Arcoiris",pch=17, cex=3)
 palette("default")
 ```
 
-### Notação Matemática em Gráficos
+### Textos e Notação Matemática em Gráficos
+
+Antes de comenzar con notación matemática es importante que sepas que existe la función ``text()``. La función ``text()`` dibuja cadenas sobre gráficas e pode ser consultada através de ``?text``
+
+```{r}
+# criando um gráfico vazio
+plot(1:20, type="n")
+
+# inserindo o texto "Olá Mundo" na coordenada (5,5)
+text(5, 5, "Olá Mundo")
+
+# alterando o tamanho do texto inserido
+text(11, 11,"¡Hola Mundo! x2", cex=2)
+
+# alterando a família da fonte do texto
+text(7, 7, "¡Hola Mundo con Serif!", family="serif")
+
+text(9, 9, "¡Hola Mundo con Mono!", family="mono")
+
+text(13, 13, "¡Hola Mundo con Sans!", family="sans")
+```
+
+Muchas veces necesitarás etiquetas o títulos donde tengas que utilizar notación matemática; es decir, que tengas que hacer uso de símbolos y/o expresiones matemáticas.
+
+```{r}
+# Las columnas de texto gris muestran las expresiones en R, y la columna de texto negra muestra cómo se verán.
+
+demo(plotmath)
+```
+
+Para generar estos símbolos matemáticos, en R puedes utilizar la función ``expression()``. La función ``expression()`` recibe como argumento una expresión como las que viste en color gris. Exemplos:
+
+```{r}
+plot(1:10, type="n", main=expression(alpha + beta))
+```
+
+Además, puedes combinar expression() con la función paste() para poder tener texto y símbolos en una misma sentencia.
+
+```{r}
+plot(1:10, type="n", xlab =expression(paste("Valores de ", x^phi1)))
+```
+
+Si deseas revisar la lista de expresiones disponibles, ingresa ``?plotmath`` en la línea de comandos.  Además, puedes utilizar la función ``substitute()`` que te permitirá obtener el valor de una variable u objeto en **R**; esto lo podrás usar dentro de una función ``paste()`` para generar una expresión. Esto es muy útil si quieres obtener gráficas donde alguno de los parámetros es diferente; así puedes generar múltiples gráficas con distintos parámetros y las etiquetas de éstos pueden ir cambiando de acuerdo a los parámetros. Para conocer más acerca de la función ``substitute()`` ingresa ``?substitute`` en la línea de comandos.
+
+```{r}
+# testando a automação nos títulos de gráficos
+
+t <- 10
+plot(1:t, main = substitute(paste("La gráfica del vector 1:", x), list(x=t)))
+
+# alterando o argumento t
+
+t <- 20
+plot(1:t, main=substitute(paste("La gráfica del vector 1:", x), list(x=t)))
+```
 
 
+### Gráficos Tridimensionais
 
+Este tipo de gráficas no están implementadas en el sistema de base, por lo que usarás el **rgl**, que es un paquete de gráficos 3D que produce gráficas interactivas en 3D en tiempo real. Permite rotar de forma interactiva, ampliar los gráficos, etc.Vejamos o seguinte exemplo:
+
+```{r eval=FALSE}
+library(rgl)
+# utilizando um dataset conhecido
+data(iris)
+head(iris)
+
+# definindo as coordenadas
+x <- iris$Sepal.Length
+y <- iris$Petal.Length
+z <- iris$Sepal.Width
+
+# inicializando o ambiente 3D
+open3d() 
+plot3d(iris$Sepal.Length, iris$Petal.Length, iris$Sepal.Width)
+```
+
+Al igual que con ``plot()`` puedes especificar el tipo de gráfica usando el parámetro type.
+
+```{r eval=FALSE}
+# gráfico de esferas
+plot3d(iris$Sepal.Length, iris$Petal.Length, iris$Sepal.Width, type="s")
+
+# alterando a cor dos gráficos
+plot3d(iris$Sepal.Length,iris$Petal.Length, iris$Sepal.Width, type="s", col=rainbow(150))
+```
+
+Algo que debes saber es que si deseas graficar elemento por especie no podrás enviarle al parámetro col iris\$Species como lo habías estado haciendo con la función ``plot()``. Esta vez tendrás que tratar a iris\$Species como enteros.
+
+```{r eval=FALSE}
+plot3d(iris$Sepal.Length, iris$Petal.Length, iris$Sepal.Width,type="s", col=as.integer(iris$Species))
+```
+A diferencia de la función ``plot()`` donde si querías cambiar el tamaño del elemento graficado usabas el parámetro cex, en ``plot3d()`` si deseas cambiar el tamaño de las esferas debes usar el parámetro radius.
+
+```{r eval=FALSE}
+plot3d(iris$Sepal.Length, iris$Petal.Length,iris$Sepal.Width, type="s", col=as.integer(iris$Species), radius=1.5)
+```
+
+Si graficas líneas o puntos y deseas cambiar su tamaño, el parámetro radius no te servirá. Para cambiar el tamaño de las líneas ``plot3d()`` usa el parámetro ``lwd`` y ``size`` para cambiar el de los puntos. Al igual que con la función ``plot()``, usando ``plot3d()`` puedes cambiar el título de los ejes usando xlab, ylab y zlab.
+
+```{r}
+plot3d(iris$Sepal.Length, iris$Petal.Length, iris$Sepal.Width, type="l", col=as.integer(iris$Species), xlab ="Sepal.Length", ylab = "Petal.Length", zlab = "Sepal.Width")
+```
 
